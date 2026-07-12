@@ -8,12 +8,12 @@ class Beadhive < Formula
   # TODO: no LICENSE file in beadhive/beadhive and no license classifier on PyPI
   # yet — add a `license` field here once the source repo declares one.
 
-  depends_on "python@3.13"
   # cryptography (transitive, via Authlib/joserfc/keyring) ships a Rust
   # extension; virtualenv_install_with_resources always builds from source
   # (--no-binary=:all:), so a Rust toolchain is needed at build time even
   # though the resulting bottle needs none of this to run.
   depends_on "rust" => :build
+  depends_on "python@3.13"
 
   resource "aiofile" do
     url "https://files.pythonhosted.org/packages/48/41/2fea7e193e061ce54eacc3b7bc0e6a99e4fcff43c78cf0a76dd781ed8334/aiofile-3.11.1.tar.gz"
