@@ -3,8 +3,8 @@ class Beadhive < Formula
 
   desc "CLI for managing beads issue tracking across many repositories"
   homepage "https://github.com/beadhive/beadhive"
-  url "https://files.pythonhosted.org/packages/5c/46/cd029d3cd4ce251a6e1eebffb350d46ca20c281879fb91b215eb7bae8195/beadhive-0.1.0.tar.gz"
-  sha256 "9170419dc4a581137030ce6053a96ba8495763f4a57a6dee6e281be06e50e606"
+  url "https://files.pythonhosted.org/packages/19/57/6c59c290fcb819e1649564990fbda67600b4d901770f44352a7a9b554153/beadhive-0.1.1.tar.gz"
+  sha256 "a11ecd8b7f705d0bdfa0840f97f2d17fe8d7b55cefc6f19548ae7b0c51e38f9f"
   # TODO: no LICENSE file in beadhive/beadhive and no license classifier on PyPI
   # yet — add a `license` field here once the source repo declares one.
 
