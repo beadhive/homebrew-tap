@@ -15,15 +15,38 @@ tap "beadhive/tap"
 brew "beadhive"
 ```
 
+## Releasing a new version
+
+`beadhive` releases are cut manually (tag push in `beadhive/beadhive` triggers its own PyPI
+Trusted Publisher workflow). Once that's landed, promote it to this tap:
+
+```sh
+just promote 0.2.0
+```
+
+This verifies the version is actually live + installable on PyPI (not just "the tag was
+pushed"), updates `Formula/beadhive.rb`'s `url`/`sha256`, rebuilds from source locally, and
+runs `brew test` + `brew audit`. It does not commit or push — review the diff yourself, then:
+
+```sh
+git add Formula/beadhive.rb && git commit -m "beadhive 0.2.0" && git push
+```
+
+If `beadhive`'s own dependencies changed in the release, the `resource` blocks (transitive
+deps) need regenerating too — see `scripts/pypi-bootstrap.sh`'s sibling process in
+`beadhive/infra`, or re-run the sdist-resolution approach used to author them originally
+(`pip install --dry-run --report=...` against the new version, then look up each resolved
+package's sdist via `https://pypi.org/pypi/<name>/<version>/json`).
+
 ## Bottling
 
-PRs against a formula trigger `.github/workflows/tests.yml`, which builds and bottles it on
-each supported platform and uploads the bottles as workflow artifacts. Once the PR is green, a
-maintainer publishes the bottles by running the `brew pr-pull` workflow
-(`.github/workflows/publish.yml`) — via `gh workflow run publish.yml -f pull_request=<PR#>`, or
-manually from the Actions tab — which pulls the built bottles, inserts the `bottle do ... end`
-block into the formula, and pushes the commit to `main`. After that, `brew install
-beadhive/tap/beadhive` downloads a prebuilt bottle instead of compiling from source.
+`.github/workflows/tests.yml` builds + bottles every PR automatically (read-only, so it's
+unaffected by the note below). `.github/workflows/publish.yml` (`brew pr-pull`, which would
+insert the `bottle do ... end` block and push to `main`) is **not currently wired up** — the
+`beadhive` GitHub org enforces read-only default workflow permissions, which is a hard ceiling
+no repo can override upward, so `GITHUB_TOKEN` can't push. Until that's revisited (a PAT-backed
+secret would restore full automation without touching org policy), `just promote` above is the
+real release path, and installs build from source rather than downloading a bottle.
 
 ## Documentation
 
