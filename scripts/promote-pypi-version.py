@@ -7,7 +7,10 @@ package), then rewrites the formula's top-level `url`/`sha256` to point at
 it. Does NOT touch the `resource` blocks (transitive deps) — only re-run
 those (see README) if beadhive's own dependencies changed in this release.
 
-Usage: scripts/promote-pypi-version.py <version>
+If <version> is omitted, uses whatever PyPI currently reports as the project's
+latest stable release (its `info.version` field — excludes yanked/pre-releases).
+
+Usage: scripts/promote-pypi-version.py [version]
 """
 import json
 import re
@@ -22,20 +25,27 @@ def die(msg):
 
 
 def main():
-    if len(sys.argv) != 2:
-        die("usage: promote-pypi-version.py <version>")
-    version = sys.argv[1]
+    if len(sys.argv) > 2:
+        die("usage: promote-pypi-version.py [version]")
+    version = sys.argv[1] if len(sys.argv) == 2 else None
 
-    print(f"==> Checking beadhive=={version} is live on PyPI...")
-    try:
-        with urllib.request.urlopen(
-            f"https://pypi.org/pypi/beadhive/{version}/json", timeout=15
-        ) as resp:
+    if version is None:
+        print("==> No version given — looking up latest stable release on PyPI...")
+        with urllib.request.urlopen("https://pypi.org/pypi/beadhive/json", timeout=15) as resp:
             data = json.load(resp)
-    except urllib.error.HTTPError as e:
-        if e.code == 404:
-            die(f"beadhive=={version} is not on PyPI yet (404). Did the release workflow finish?")
-        raise
+        version = data["info"]["version"]
+        print(f"    latest stable: {version}")
+    else:
+        print(f"==> Checking beadhive=={version} is live on PyPI...")
+        try:
+            with urllib.request.urlopen(
+                f"https://pypi.org/pypi/beadhive/{version}/json", timeout=15
+            ) as resp:
+                data = json.load(resp)
+        except urllib.error.HTTPError as e:
+            if e.code == 404:
+                die(f"beadhive=={version} is not on PyPI yet (404). Did the release workflow finish?")
+            raise
 
     sdist = next((u for u in data["urls"] if u["packagetype"] == "sdist"), None)
     if sdist is None:

@@ -45,8 +45,23 @@ unaffected by the note below). `.github/workflows/publish.yml` (`brew pr-pull`, 
 insert the `bottle do ... end` block and push to `main`) is **not currently wired up** — the
 `beadhive` GitHub org enforces read-only default workflow permissions, which is a hard ceiling
 no repo can override upward, so `GITHUB_TOKEN` can't push. Until that's revisited (a PAT-backed
-secret would restore full automation without touching org policy), `just promote` above is the
-real release path, and installs build from source rather than downloading a bottle.
+secret would restore full automation without touching org policy), bottling is manual:
+
+```sh
+just bottle
+```
+
+This builds a bottle for the current formula version, hosts it as a GitHub Release asset on
+this repo, inserts the `bottle do ... end` block, and reinstalls to verify the bottle
+downloads and works. Run it after `just promote` has landed and been pushed. Does not commit —
+review the diff yourself, then `git add Formula/beadhive.rb && git commit -m "bottle: beadhive
+0.2.0" && git push`.
+
+**This repo must be public** for the bottle to actually be fetchable — GitHub 404s
+unauthenticated requests (including plain `brew install` and any external `brew tap`) against
+release assets on a private repo, indistinguishably from a missing asset. Until this repo is
+flipped public, only accounts with repo access (i.e., you, via your own `git`/`gh` credentials)
+can install from this tap at all, bottle or not.
 
 ## Documentation
 

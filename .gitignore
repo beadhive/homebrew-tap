@@ -1,0 +1,5 @@
+# Local Homebrew bottle build artifacts (just bottle) — uploaded to GitHub
+# Releases, not committed here.
+*.bottle.tar.gz
+*.bottle.json
+*.bottle.*.tar.gz

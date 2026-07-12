@@ -8,6 +8,11 @@ class Beadhive < Formula
   # TODO: no LICENSE file in beadhive/beadhive and no license classifier on PyPI
   # yet — add a `license` field here once the source repo declares one.
 
+  bottle do
+    root_url "https://github.com/beadhive/homebrew-tap/releases/download/beadhive-0.1.1"
+    sha256 cellar: :any, arm64_sonoma: "12871b0d4f72f90ba703e7a5ca32cd790bc8fc8569ed4530828d2a73c6047c19"
+  end
+
   # cryptography (transitive, via Authlib/joserfc/keyring) ships a Rust
   # extension; virtualenv_install_with_resources always builds from source
   # (--no-binary=:all:), so a Rust toolchain is needed at build time even
