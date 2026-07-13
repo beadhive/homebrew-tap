@@ -4,6 +4,25 @@
 default:
     @just --list
 
+# Homebrew's actual tap clone (~/Library/Taps/beadhive/homebrew-tap) is a
+# separate `git clone` of this repo's origin/main — NOT this checkout. Edit
+# Formula/beadhive.rb here and `brew install`/`test`/`audit`/`bottle` will
+# silently run against the stale origin copy instead. Force it to be a
+# symlink back to this checkout so local verification is ever testing what
+# we're about to commit. Safe to blow away and relink: it's just a cache.
+_link-tap:
+    #!/usr/bin/env bash
+    set -euo pipefail
+    REPO_DIR="{{justfile_directory()}}"
+    TAP_DIR="$(brew --repository beadhive/tap 2>/dev/null || echo "$(brew --repository)/Library/Taps/beadhive/homebrew-tap")"
+    if [ -L "$TAP_DIR" ] && [ "$(readlink "$TAP_DIR")" = "$REPO_DIR" ]; then
+        exit 0
+    fi
+    echo "==> Linking Homebrew tap ($TAP_DIR) -> $REPO_DIR"
+    rm -rf "$TAP_DIR"
+    mkdir -p "$(dirname "$TAP_DIR")"
+    ln -s "$REPO_DIR" "$TAP_DIR"
+
 # Promote a manually-cut PyPI release of `beadhive` to this tap's formula.
 # Run this AFTER cutting the release in beadhive/beadhive (tag push -> PyPI
 # publish) — it verifies the version is really live + installable on PyPI
@@ -16,7 +35,7 @@ default:
 #
 # version is optional — omit it to auto-detect PyPI's current latest stable
 # release. Usage: just promote / just promote 0.2.0
-promote version="":
+promote version="": _link-tap
     python3 scripts/promote-pypi-version.py {{version}}
     @echo "==> Rebuilding + testing locally..."
     -brew uninstall --force beadhive/tap/beadhive
@@ -44,7 +63,7 @@ promote version="":
 #      suffix on a formula's first-ever bottle.
 #
 # Does NOT commit — review the diff yourself first.
-bottle:
+bottle: _link-tap
     #!/usr/bin/env bash
     set -euo pipefail
     VERSION=$(brew ruby -e 'puts Formula["beadhive"].version' 2>/dev/null | tail -1)
