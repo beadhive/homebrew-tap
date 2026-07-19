@@ -87,6 +87,9 @@ jobs:
         uses: peter-evans/create-pull-request@v7
         with:
           token: ${{ steps.app-token.outputs.token }}
+          # Commit via the GitHub API as the app so the bump commit is
+          # signature-verified — main's ruleset requires signed commits.
+          sign-commits: true
           branch: bump/beadhive-${{ steps.promoted.outputs.version }}
           title: "beadhive ${{ steps.promoted.outputs.version }}"
           commit-message: "beadhive ${{ steps.promoted.outputs.version }}"
