@@ -62,11 +62,14 @@ jobs:
           version="$(sed -n 's|.*/beadhive-\(.*\)\.tar\.gz.*|\1|p' Formula/beadhive.rb | head -1)"
           echo "version=$version" >> "$GITHUB_OUTPUT"
 
-      - name: Strip stale git auth headers
-        # setup-homebrew configures a github.com auth extraheader; git then
-        # sends it alongside create-pull-request's own token header and the
+      - name: Suspend setup-homebrew git auth
+        # setup-homebrew configures a github.com auth extraheader; git would
+        # send it alongside create-pull-request's own token header and the
         # server rejects the pair (400 "Duplicate header: Authorization").
+        # Saved and restored below so setup-homebrew's post-cleanup (which
+        # unsets it, failing if absent) still succeeds.
         run: |
+          git config --global --get-all 'http.https://github.com/.extraheader' > /tmp/gh-extraheader || true
           git config --global --unset-all 'http.https://github.com/.extraheader' || true
           git config --unset-all 'http.https://github.com/.extraheader' || true
 
@@ -94,3 +97,10 @@ jobs:
             label and publish.yml uploads the bottles and lands this on main.
           labels: automated-bump
           delete-branch: true
+
+      - name: Restore setup-homebrew git auth
+        if: always()
+        run: |
+          while IFS= read -r h; do
+            [ -n "$h" ] && git config --global --add 'http.https://github.com/.extraheader' "$h"
+          done < /tmp/gh-extraheader || true
