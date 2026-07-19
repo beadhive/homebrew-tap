@@ -392,7 +392,7 @@ class Beadhive < Formula
   def install
     # Build cryptography's openssl-sys against brewed OpenSSL instead of
     # letting cargo vendor its own copy.
-    ENV["OPENSSL_DIR"] = Formula["openssl@3"].opt_prefix
+    ENV["OPENSSL_DIR"] = formula_opt_prefix("openssl@3")
     ENV["OPENSSL_NO_VENDOR"] = "1"
     virtualenv_install_with_resources
   end
