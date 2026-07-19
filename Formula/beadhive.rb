@@ -10,7 +10,9 @@ class Beadhive < Formula
 
   bottle do
     root_url "https://github.com/beadhive/homebrew-tap/releases/download/beadhive-0.3.1"
-    sha256 cellar: :any, arm64_sonoma: "a44433ee74a69ccda9ff69d6efd943763cd7d0573740349c23e0daed3f19d6d8"
+    rebuild 1
+    sha256 cellar: :any, arm64_tahoe:  "b6f9a90ad1b8fb8716ca70fcdd62ba43e66312ae3d7208abd3f0bab83688c5b0"
+    sha256 cellar: :any, x86_64_linux: "0a0888d8e7bdba267f26fc595e7b7aaae6cdbac0733628376facf68682a6d0d3"
   end
 
   # cryptography (transitive, via Authlib/joserfc/keyring) ships a Rust
