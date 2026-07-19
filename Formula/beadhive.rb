@@ -19,6 +19,9 @@ class Beadhive < Formula
   # though the resulting bottle needs none of this to run.
   depends_on "rust" => :build
   depends_on "libyaml"
+  # cryptography's compiled extension links against OpenSSL; declare it so the
+  # Linux build finds headers and `brew linkage --test` sees a declared dep.
+  depends_on "openssl@3"
   depends_on "python@3.13"
 
   resource "aiofile" do
@@ -387,6 +390,10 @@ class Beadhive < Formula
   end
 
   def install
+    # Build cryptography's openssl-sys against brewed OpenSSL instead of
+    # letting cargo vendor its own copy.
+    ENV["OPENSSL_DIR"] = Formula["openssl@3"].opt_prefix
+    ENV["OPENSSL_NO_VENDOR"] = "1"
     virtualenv_install_with_resources
   end
 
