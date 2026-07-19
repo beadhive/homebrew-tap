@@ -1,6 +1,16 @@
+# Publishes a bump PR: `brew pr-pull` downloads the PR's test-bot bottle
+# artifacts, uploads them to this repo's GitHub Releases, rewrites the
+# formula with the `bottle do` block, and pushes the result to main.
+#
+# Triggered by adding the `pr-pull` label to a PR (auto-label.yml does this
+# for bot bump PRs once CI is green; humans can add it manually), or by
+# workflow_dispatch with a PR number.
 name: brew pr-pull
 
 on:
+  pull_request_target:
+    types:
+      - labeled
   workflow_dispatch:
     inputs:
       pull_request:
@@ -11,6 +21,7 @@ on:
 
 jobs:
   pr-pull:
+    if: github.event_name == 'workflow_dispatch' || github.event.label.name == 'pr-pull'
     runs-on: ubuntu-latest
     permissions:
       actions: read
@@ -31,7 +42,7 @@ jobs:
         env:
           HOMEBREW_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           HEAD_SHA: ${{ inputs.head_sha }}
-          PULL_REQUEST: ${{ inputs.pull_request }}
+          PULL_REQUEST: ${{ inputs.pull_request || github.event.pull_request.number }}
         run: |
           if [[ -n "$HEAD_SHA" ]]
           then

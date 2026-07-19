@@ -1,0 +1,80 @@
+# Opens a version-bump PR when a new beadhive release lands on PyPI.
+#
+# Triggered by repository_dispatch (event `pypi-release`) from the beadhive
+# repo's release workflow, or manually via workflow_dispatch. The PR is
+# opened with a beadhive-automation app token instead of GITHUB_TOKEN so the
+# resulting PR still triggers test-bot CI (PRs created with GITHUB_TOKEN
+# don't trigger workflows). App creds provisioned via infra tofu.
+name: bump formula
+
+on:
+  repository_dispatch:
+    types:
+      - pypi-release
+  workflow_dispatch:
+    inputs:
+      version:
+        description: PyPI version to promote (blank = latest stable)
+        required: false
+
+jobs:
+  bump:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout tap
+        uses: actions/checkout@v5
+
+      - name: Resolve version
+        id: version
+        env:
+          VERSION: ${{ github.event.client_payload.version || inputs.version }}
+        run: echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+
+      - name: Promote formula to PyPI release
+        run: python3 scripts/promote-pypi-version.py ${{ steps.version.outputs.version }}
+
+      - name: Set up Homebrew
+        uses: Homebrew/actions/setup-homebrew@1f8e202ffddf94def7f42f6fa3a482e821489f9c # 2026.07.10.1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Regenerate Python resource blocks
+        run: |
+          # Expose the checked-out working copy as the beadhive/tap tap so
+          # update-python-resources edits these files in place.
+          mkdir -p "$(brew --repository)/Library/Taps/beadhive"
+          ln -sfn "$GITHUB_WORKSPACE" "$(brew --repository)/Library/Taps/beadhive/homebrew-tap"
+          brew update-python-resources beadhive/tap/beadhive
+
+      - name: Read promoted version from formula
+        id: promoted
+        run: |
+          version="$(sed -n 's|.*/beadhive-\(.*\)\.tar\.gz.*|\1|p' Formula/beadhive.rb | head -1)"
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+
+      - name: Mint bump token
+        id: app-token
+        uses: actions/create-github-app-token@fee1f7d63c2ff003460e3d139729b119787bc349 # v2.2.2
+        with:
+          app-id: ${{ secrets.AUTOMATION_APP_ID }}
+          private-key: ${{ secrets.AUTOMATION_APP_PRIVATE_KEY }}
+          permission-contents: write
+          permission-pull-requests: write
+          permission-issues: write
+
+      - name: Open bump PR
+        uses: peter-evans/create-pull-request@v7
+        with:
+          token: ${{ steps.app-token.outputs.token }}
+          branch: bump/beadhive-${{ steps.promoted.outputs.version }}
+          title: "beadhive ${{ steps.promoted.outputs.version }}"
+          commit-message: "beadhive ${{ steps.promoted.outputs.version }}"
+          body: |
+            Automated bump to the `beadhive` release now live on PyPI.
+
+            Once `brew test-bot` is green, auto-label.yml adds the `pr-pull`
+            label and publish.yml uploads the bottles and lands this on main.
+          labels: automated-bump
+          delete-branch: true

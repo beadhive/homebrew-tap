@@ -1,0 +1,54 @@
+# Zero-touch publish gate: when test-bot finishes green on an automated bump
+# PR (label `automated-bump`, opened by bump.yml), add the `pr-pull` label,
+# which fires publish.yml. Human-authored PRs never get auto-labeled — a
+# maintainer adds `pr-pull` by hand after review.
+#
+# The label is added with a beadhive-automation app token, not GITHUB_TOKEN:
+# label events produced by GITHUB_TOKEN don't trigger workflows, so
+# publish.yml would never fire.
+name: auto pr-pull
+
+on:
+  workflow_run:
+    workflows:
+      - brew test-bot
+    types:
+      - completed
+
+jobs:
+  label:
+    if: >-
+      github.event.workflow_run.conclusion == 'success' &&
+      github.event.workflow_run.event == 'pull_request'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Mint label token
+        id: app-token
+        uses: actions/create-github-app-token@fee1f7d63c2ff003460e3d139729b119787bc349 # v2.2.2
+        with:
+          app-id: ${{ secrets.AUTOMATION_APP_ID }}
+          private-key: ${{ secrets.AUTOMATION_APP_PRIVATE_KEY }}
+          permission-pull-requests: write
+          permission-issues: write
+
+      - name: Label green automated bump PRs
+        env:
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
+          BRANCH: ${{ github.event.workflow_run.head_branch }}
+          REPO: ${{ github.repository }}
+        run: |
+          pr_json="$(gh pr list --repo "$REPO" --head "$BRANCH" --state open \
+            --json number,labels --jq '.[0]')"
+          if [[ -z "$pr_json" || "$pr_json" == "null" ]]; then
+            echo "No open PR for branch $BRANCH — nothing to label."
+            exit 0
+          fi
+          number="$(jq -r '.number' <<<"$pr_json")"
+          if ! jq -e '.labels[] | select(.name == "automated-bump")' <<<"$pr_json" >/dev/null; then
+            echo "PR #$number is not an automated bump — leaving publish to a human."
+            exit 0
+          fi
+          gh pr edit "$number" --repo "$REPO" --add-label pr-pull
+          echo "Labeled PR #$number with pr-pull."
