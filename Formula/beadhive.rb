@@ -24,6 +24,9 @@ class Beadhive < Formula
   depends_on "openssl@3"
   depends_on "python@3.13"
 
+  # cffi's compiled extension links libffi (brewed on Linux, system on macOS).
+  uses_from_macos "libffi"
+
   resource "aiofile" do
     url "https://files.pythonhosted.org/packages/48/41/2fea7e193e061ce54eacc3b7bc0e6a99e4fcff43c78cf0a76dd781ed8334/aiofile-3.11.1.tar.gz"
     sha256 "1f91912c6643d2a4e49ca4ae3514f0bf3867ce948a36d99a6411b8f4755f4cf9"
