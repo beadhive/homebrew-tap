@@ -25,6 +25,10 @@ jobs:
     steps:
       - name: Checkout tap
         uses: actions/checkout@v5
+        with:
+          # create-pull-request authenticates with the app token; checkout's
+          # persisted header would collide (git 400 "Duplicate header").
+          persist-credentials: false
 
       - name: Resolve version
         id: version
