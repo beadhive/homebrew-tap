@@ -18,6 +18,7 @@ class Beadhive < Formula
   # (--no-binary=:all:), so a Rust toolchain is needed at build time even
   # though the resulting bottle needs none of this to run.
   depends_on "rust" => :build
+  depends_on "libyaml"
   depends_on "python@3.13"
 
   resource "aiofile" do
