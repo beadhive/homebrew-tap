@@ -65,4 +65,5 @@ jobs:
         uses: Homebrew/actions/git-try-push@1f8e202ffddf94def7f42f6fa3a482e821489f9c # 2026.07.10.1
         with:
           branch: main
-          token: ${{ steps.app-token.outputs.token }}
+          # no token here: setup-homebrew already configured git auth with the
+          # app token; passing one again duplicates the Authorization header.
