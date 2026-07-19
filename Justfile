@@ -44,6 +44,26 @@ promote version="": _link-tap
     brew audit --formula beadhive/tap/beadhive
     @echo "==> All checks passed. Review the diff (git diff Formula/beadhive.rb), then commit + push."
 
+# Lint GitHub workflows (actionlint, if installed) and the formula
+# (`brew style` + `brew audit --strict`). Does not require the tap to be
+# built/installed first.
+lint: _link-tap
+    #!/usr/bin/env bash
+    set -euo pipefail
+    if command -v actionlint >/dev/null 2>&1; then
+        echo "==> actionlint"
+        # -ignore: matrix-object-into-container (tests.yml:20) is a known
+        # false positive (rhysd/actionlint#77) — same idiom homebrew-core's
+        # own tests.yml uses to give only the Linux job --privileged.
+        actionlint -ignore 'object, array, and null values should not be evaluated in template'
+    else
+        echo "==> actionlint not installed, skipping (brew install actionlint)"
+    fi
+    echo "==> brew style"
+    brew style beadhive/tap/beadhive
+    echo "==> brew audit --strict"
+    brew audit --formula --strict beadhive/tap/beadhive
+
 # Build a local Homebrew bottle for the CURRENT formula version and insert
 # its `bottle do ... end` block. Hosts the bottle as a GitHub Release asset
 # on this repo (CI-based publishing via publish.yml is blocked by org
