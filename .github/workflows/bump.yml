@@ -46,7 +46,11 @@ jobs:
           # update-python-resources edits these files in place.
           mkdir -p "$(brew --repository)/Library/Taps/beadhive"
           ln -sfn "$GITHUB_WORKSPACE" "$(brew --repository)/Library/Taps/beadhive/homebrew-tap"
-          brew update-python-resources beadhive/tap/beadhive
+          # --ignore-main-package-cooldown: this run fires minutes after WE
+          # publish to PyPI, always inside brew's 24h supply-chain cooldown
+          # (--uploaded-prior-to=P1D). Our own just-published package is
+          # trusted; dependencies still respect the cooldown.
+          brew update-python-resources --ignore-main-package-cooldown beadhive/tap/beadhive
 
       - name: Read promoted version from formula
         id: promoted
