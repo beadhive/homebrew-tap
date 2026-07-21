@@ -36,13 +36,13 @@ jobs:
           VERSION: ${{ github.event.client_payload.version || inputs.version }}
         run: echo "version=$VERSION" >> "$GITHUB_OUTPUT"
 
-      - name: Promote formula to PyPI release
-        run: python3 scripts/promote-pypi-version.py ${{ steps.version.outputs.version }}
-
       - name: Set up Homebrew
         uses: Homebrew/actions/setup-homebrew@1f8e202ffddf94def7f42f6fa3a482e821489f9c # 2026.07.10.1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Promote formula to PyPI release
+        run: python3 scripts/promote-pypi-version.py ${{ steps.version.outputs.version }}
 
       - name: Regenerate Python resource blocks
         run: |
