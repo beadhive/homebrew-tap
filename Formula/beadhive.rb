@@ -3,8 +3,8 @@ class Beadhive < Formula
 
   desc "CLI for managing beads issue tracking across many repositories"
   homepage "https://github.com/beadhive/beadhive"
-  url "https://files.pythonhosted.org/packages/94/8b/5a4ab033473a1bf6b82da4a18750980aa0e3ffee18dfa5a2a106a2545655/beadhive-0.4.1.tar.gz"
-  sha256 "a6ab86bc6bee638fa2c0cb7cf1e860db9b58e2c4de1cf4a5292e8b986daca153"
+  url "https://files.pythonhosted.org/packages/15/d8/83df7c10bced980e8312153f6ad7f6fe2448b129a1ec82833447d48fbcc9/beadhive-0.7.0.tar.gz"
+  sha256 "e9068d4926eb1c7da95a3f666736e156a20eb3a8c46b8a0cd7a9711901cb422d"
   # TODO: no LICENSE file in beadhive/beadhive and no license classifier on PyPI
   # yet — add a `license` field here once the source repo declares one.
 
@@ -34,13 +34,13 @@ class Beadhive < Formula
   end
 
   resource "annotated-doc" do
-    url "https://files.pythonhosted.org/packages/57/ba/046ceea27344560984e26a590f90bc7f4a75b06701f653222458922b558c/annotated_doc-0.0.4.tar.gz"
-    sha256 "fbcda96e87e9c92ad167c2e53839e57503ecfda18804ea28102353485033faa4"
+    url "https://files.pythonhosted.org/packages/5a/8e/38aa427ed5402449e226975b649c5dc73ccadfefeb95e6aecb8f8ea4b6b6/annotated_doc-0.0.5.tar.gz"
+    sha256 "c7e58ce09192557605d8bbd92836d7e1d520ac9580096042c0bfd197efacf1bb"
   end
 
   resource "annotated-types" do
-    url "https://files.pythonhosted.org/packages/ee/67/531ea369ba64dcff5ec9c3402f9f51bf748cec26dde048a2f973a4eea7f5/annotated_types-0.7.0.tar.gz"
-    sha256 "aff07c09a53a08bc8cfccb9c85b05f1aa9a2a6f23728d790723543408344ce89"
+    url "https://files.pythonhosted.org/packages/5f/56/a8120250d128bed162cd73c76d45f6ef9991f3e068f62a8ee060afa3104a/annotated_types-0.8.0.tar.gz"
+    sha256 "13b2beaad985e05e2d6407ee4c4f35590b11f8d693a258a561055cac8f64cab7"
   end
 
   resource "anyio" do
@@ -64,8 +64,8 @@ class Beadhive < Formula
   end
 
   resource "cachetools" do
-    url "https://files.pythonhosted.org/packages/f4/8b/0d3945a13955303b81272f759a0331e54c5c793da455e6f5706b89d2639c/cachetools-7.1.4.tar.gz"
-    sha256 "437f55a4e0c1b01a4f3077cc470e6991d47430970e36fbcb77e2be0df4fc1cd6"
+    url "https://files.pythonhosted.org/packages/70/d2/47e8bc06fe2a06d3f5bdf20f1126ab66c4e99dc48d940e7ba873f7ac7131/cachetools-7.1.7.tar.gz"
+    sha256 "a3e2a00b14d8f8a6b70c1dae7b4685e7ad3bc965c5b42124a2d6ce895da6cf50"
   end
 
   resource "caio" do
@@ -89,13 +89,13 @@ class Beadhive < Formula
   end
 
   resource "cryptography" do
-    url "https://files.pythonhosted.org/packages/1f/99/d1c90d6041656cc6ee229dc99cd67fd0cd5aec3c5f7d72fffc27cc750054/cryptography-49.0.0.tar.gz"
-    sha256 "f89660a348f4f78a92366240a61404e337586ef7f5909a2fef59ca88ef505493"
+    url "https://files.pythonhosted.org/packages/de/41/6cbdcf9142d00fe82836fbb51e503e58088575cf7a0fe1dbff6695bf0840/cryptography-50.0.0.tar.gz"
+    sha256 "eeac2acb5a20ed25e0ad6d1df9891a520b78b404266b6d11778f25d5d691a6c9"
   end
 
   resource "cyclopts" do
-    url "https://files.pythonhosted.org/packages/3d/47/32d992e829f63aedea5b93360db23c8882c9bbbde094bcf0fff899ea8a3b/cyclopts-4.22.1.tar.gz"
-    sha256 "49cd3779da7113a96ac5c23b151aa61ac9ae1b4b1fe813594d207ca843c97892"
+    url "https://files.pythonhosted.org/packages/13/55/119aaed705f1a05cf0fde86b921f837cafd049136013f381ed1014f381d9/cyclopts-4.22.3.tar.gz"
+    sha256 "6c366f32604c23db83819a0411c0e30b398a6fcbc718191ea39f7119ce725d8e"
   end
 
   resource "dnspython" do
@@ -119,13 +119,13 @@ class Beadhive < Formula
   end
 
   resource "fastmcp" do
-    url "https://files.pythonhosted.org/packages/9c/f7/5188565d1b93ad611cbd80bf473e7ad669d1f3b689c4bedcd304e1ec3472/fastmcp-3.4.4.tar.gz"
-    sha256 "378202e26ec15b23819d9a1c0d1b0ebda096bc712720532010a0b82a45c2b1df"
+    url "https://files.pythonhosted.org/packages/23/14/c1ffb91b7d1fece86c81e1f9df5474f30fd97e4cdaa398814bbbeee88568/fastmcp-3.4.5.tar.gz"
+    sha256 "a95f2bc876bef42e8b50f7872f24f3f2fe3b1d37408c734e8b9d9e03014b72d3"
   end
 
   resource "fastmcp-slim" do
-    url "https://files.pythonhosted.org/packages/45/79/f35661c6a1d76dfbe17a079f912d96fffcfdd40fad5a9144bb9e7dfb1fdf/fastmcp_slim-3.4.4.tar.gz"
-    sha256 "dcaa3e0be2127d7eacdce592c2ef0039204923dc0ec396454615cb4a3275b078"
+    url "https://files.pythonhosted.org/packages/81/1d/f3e271fbcd01ce01a4cf623b336d8e1305c192aa5d5e8e0223b7167462e9/fastmcp_slim-3.4.5.tar.gz"
+    sha256 "5badc3bceee61f61297eeb9494f499325f3ce1cafabf4611b31f6c3e9d7dff59"
   end
 
   resource "griffelib" do
@@ -214,8 +214,8 @@ class Beadhive < Formula
   end
 
   resource "mcp" do
-    url "https://files.pythonhosted.org/packages/6e/77/9450b8f251a13affb6281997d0523c4615f8a8b35d0b21ff30db3a5aac9d/mcp-1.28.1.tar.gz"
-    sha256 "d51e36a5f5644faea4f85ea649bfffa6bc6c26770d42798ad6a3de3d2ba69683"
+    url "https://files.pythonhosted.org/packages/30/d3/f9acc21dfc886e4f78e2add1a47db46ce16884346afde53f8a064c02c891/mcp-1.29.0.tar.gz"
+    sha256 "52d01f334de1868cc3bb2d6604931126a67631f99a6c5d3b82ba47290315ec36"
   end
 
   resource "mdurl" do
@@ -379,8 +379,8 @@ class Beadhive < Formula
   end
 
   resource "uvicorn" do
-    url "https://files.pythonhosted.org/packages/a2/65/b7c6c443ccc58678c91e1e973bbe2a878591538655d6e1d47f24ba1c51f3/uvicorn-0.51.0.tar.gz"
-    sha256 "f6f4b69b657c312f516dd2d268ab9ae6f254b11e4bac504f37b2ab58b24dd0b0"
+    url "https://files.pythonhosted.org/packages/03/18/ccce41535dee1be77735592bd19965f3972c82e07ee703d324709496b716/uvicorn-0.52.1.tar.gz"
+    sha256 "112ec661814189acbccd3f7b86460147cc065fc92c0821afa78918780e4354dd"
   end
 
   resource "watchfiles" do
@@ -389,8 +389,8 @@ class Beadhive < Formula
   end
 
   resource "websockets" do
-    url "https://files.pythonhosted.org/packages/21/f7/bc3a25c5ec26ce62ce487690becc2f3710bbc7b33338f005ad390db0b986/websockets-16.1.1.tar.gz"
-    sha256 "db234eda965dcce15df96bb9709f587cd87d4d52aaf0e80e2f34ec04c7670c57"
+    url "https://files.pythonhosted.org/packages/f7/96/e01084f83a64bcb3a27994bd0cb0db68ff29d9c6707fae37ec19b18ba990/websockets-17.0.1.tar.gz"
+    sha256 "5baa9bc0dfbae8c507e51c8cf1b6d4628086f7a87bbd3a9952bd5f035451f1cc"
   end
 
   def install
