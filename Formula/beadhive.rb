@@ -9,9 +9,9 @@ class Beadhive < Formula
   # yet — add a `license` field here once the source repo declares one.
 
   bottle do
-    root_url "https://github.com/beadhive/homebrew-tap/releases/download/beadhive-0.7.1"
-    sha256 cellar: :any, arm64_tahoe:  "1be5d57ebed6e52aa5ce08c1ce1dfaa3a7fc2adf2cd83a2b425b001c5973dcd7"
-    sha256 cellar: :any, x86_64_linux: "582c893bc9dae2910f944fae9b98b670d590a00e34ff2ca237f80d9bbeceaa67"
+    root_url "https://github.com/beadhive/homebrew-tap/releases/download/beadhive-0.8.1"
+    sha256 cellar: :any, arm64_tahoe:  "b7a5f8d9ee77d932c1b3a4736c7227e1bfde2b67843ec203e44c52125b1f94cb"
+    sha256 cellar: :any, x86_64_linux: "37f76d1bf27657f8fbba94bcf18dd9a70a9bff2265b0cc8f7e4da64d83eb4f7d"
   end
 
   # cryptography (transitive, via Authlib/joserfc/keyring) ships a Rust
