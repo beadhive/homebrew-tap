@@ -3,8 +3,8 @@ class Beadhive < Formula
 
   desc "CLI for managing beads issue tracking across many repositories"
   homepage "https://github.com/beadhive/beadhive"
-  url "https://files.pythonhosted.org/packages/3a/7b/815f2791c34b8d030fe460ffa828d145d36c1d23c21e95c0e8824432aebf/beadhive-0.8.5.tar.gz"
-  sha256 "560e427c91821027e631f07218482216de285fd75991bdde8daad1242cb198dd"
+  url "https://files.pythonhosted.org/packages/0a/97/ba89e0c1c8532e8dd44303a3b45ea2ff01c17d29bbfedaa2a261dd0f0104/beadhive-0.8.6.tar.gz"
+  sha256 "931a234d320716dba1197546048d3ae8c6644817f0a032ccdfffafe999dab460"
   # TODO: no LICENSE file in beadhive/beadhive and no license classifier on PyPI
   # yet — add a `license` field here once the source repo declares one.
 
@@ -274,8 +274,8 @@ class Beadhive < Formula
   end
 
   resource "pydantic-settings" do
-    url "https://files.pythonhosted.org/packages/5c/b5/8f48e906c3e0205276e8bd8cb7512217a87b2685304d64be27cad5b3019f/pydantic_settings-2.14.2.tar.gz"
-    sha256 "c19dd64b19097f1de80184f0cc7b0272a13ae6e170cbf240a3e27e381ed14a5f"
+    url "https://files.pythonhosted.org/packages/68/ca/31c57507b13119d7d3cfa1576dad2911a4861e3be07b579395f4e9d393f9/pydantic_settings-2.15.0.tar.gz"
+    sha256 "694b793e84f766ba76a90ebdefc01d0a9a045dab0382bee70393da93712ad117"
   end
 
   resource "pygments" do
