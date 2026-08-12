@@ -3,8 +3,8 @@ class Beadhive < Formula
 
   desc "CLI for managing beads issue tracking across many repositories"
   homepage "https://github.com/beadhive/beadhive"
-  url "https://files.pythonhosted.org/packages/da/9c/c5b7d619ce87a810cc59e3167bf349dad2c98e6b4491290f3d64292ff98e/beadhive-0.10.0.tar.gz"
-  sha256 "6daf9242e4aac600d03abd3f7cc14a891ad5215894bf0f672b42cfd7fc028db9"
+  url "https://files.pythonhosted.org/packages/0c/8a/035c899aaf0715544adf143331103ff3168b14912d74f5eb4ff0a6653c4f/beadhive-0.11.0.tar.gz"
+  sha256 "5d0c77cc925a67a42e7fea16048390f432cab01572efb208c69c1c279d5ebdf6"
   # TODO: no LICENSE file in beadhive/beadhive and no license classifier on PyPI
   # yet — add a `license` field here once the source repo declares one.
 
@@ -119,13 +119,13 @@ class Beadhive < Formula
   end
 
   resource "fastmcp" do
-    url "https://files.pythonhosted.org/packages/a9/5a/e2c78e26233cd8a416b21513e1925435d54c008a0ec467dbdaa80369daf7/fastmcp-3.4.6.tar.gz"
-    sha256 "2287938da8364ad7071bec2d2393af6ae10fd4e836f06f506569f1456cc87eb4"
+    url "https://files.pythonhosted.org/packages/62/dd/fd444d94ae7afdaf5b6dd168799d34023f576b405872d6a27d5686a9d1f4/fastmcp-3.4.7.tar.gz"
+    sha256 "43117aca886f5ee2f6a569bba91cef02b59c339aad04ba29950ff18d251c822a"
   end
 
   resource "fastmcp-slim" do
-    url "https://files.pythonhosted.org/packages/ca/b6/b5b9e81e67a3f39534881d2af6aa3fbd2dc367eaa070c3c932770a0c062f/fastmcp_slim-3.4.6.tar.gz"
-    sha256 "6a1e6e42c697ba90abcb1be617a26947d07316f13c6fa138ae7b0de24558e32c"
+    url "https://files.pythonhosted.org/packages/12/ac/7924e803368d0758ee4d6b1259066550df78f58f0f9f8bfebd5a123e957d/fastmcp_slim-3.4.7.tar.gz"
+    sha256 "06b32a358320a7dc2b2ee040ba89ea55ddc20763dff2949f384f7974b13b5d8f"
   end
 
   resource "griffelib" do
@@ -249,8 +249,8 @@ class Beadhive < Formula
   end
 
   resource "platformdirs" do
-    url "https://files.pythonhosted.org/packages/36/0a/062135c9a98dac804265073cc3afdbec5ae1aa37980bb354f461bafe81b4/platformdirs-4.11.1.tar.gz"
-    sha256 "bb1af68078f25e2f3e111e2d43b8d536df41b73c8a684b40bb018223b66fae27"
+    url "https://files.pythonhosted.org/packages/e5/98/0bf930c4f97d0266b58a89e36c015f56232c52b5d2f207215d48cca9e8f7/platformdirs-4.11.2.tar.gz"
+    sha256 "3a2ae5fca3520a01ab1be8b45613537f52ddf5b5f6f53d88233892dfbf0cd82d"
   end
 
   resource "py-key-value-aio" do
@@ -369,13 +369,13 @@ class Beadhive < Formula
   end
 
   resource "typing-inspection" do
-    url "https://files.pythonhosted.org/packages/55/e3/70399cb7dd41c10ac53367ae42139cf4b1ca5f36bb3dc6c9d33acdb43655/typing_inspection-0.4.2.tar.gz"
-    sha256 "ba561c48a67c5958007083d386c3295464928b01faa735ab8547c5692e87f464"
+    url "https://files.pythonhosted.org/packages/6d/bc/4eae18cd40c65798a16267572ba346c11f599d44b01603dbd843342042bc/typing_inspection-0.4.3.tar.gz"
+    sha256 "c5f9ec1530b5c1e2c9bc34a84d9a3466ed1b2f3f2fa9f901368d9c5596210e4d"
   end
 
   resource "uncalled-for" do
-    url "https://files.pythonhosted.org/packages/b5/82/345cc927f7fbdae6065e7768759932fcc827fc20b29b45dfbafa2f1f7da4/uncalled_for-0.3.2.tar.gz"
-    sha256 "89f5dbcd71e2b8f47c030b1fa302e6cce2ec795d1ac565eeb6525c5fe55cb8a2"
+    url "https://files.pythonhosted.org/packages/6b/5a/92ce0b3ea5481915f55da994c2c2c5f7a3c09949afde196ee89f8ab961aa/uncalled_for-0.4.0.tar.gz"
+    sha256 "335b95bd2422332ec210d518f314a16e4c640921c39fc8bf2ad095bd3538f4af"
   end
 
   resource "uvicorn" do
