@@ -15,6 +15,8 @@ tap "beadhive/tap"
 brew "beadhive"
 ```
 
+For the desktop app cask, see "Installing beadhive-app" below.
+
 ## Releasing a new version
 
 `beadhive` releases are cut manually (tag push in `beadhive/beadhive` triggers its own PyPI
@@ -59,9 +61,48 @@ review the diff yourself, then `git add Formula/beadhive.rb && git commit -m "bo
 
 **This repo must be public** for the bottle to actually be fetchable — GitHub 404s
 unauthenticated requests (including plain `brew install` and any external `brew tap`) against
-release assets on a private repo, indistinguishably from a missing asset. Until this repo is
-flipped public, only accounts with repo access (i.e., you, via your own `git`/`gh` credentials)
-can install from this tap at all, bottle or not.
+release assets on a private repo, indistinguishably from a missing asset. This is also why
+`Casks/beadhive-app.rb`'s `url` points at *this* repo's releases rather than beadhive-app's:
+beadhive-app is private, so its own release assets would 404 the same way.
+
+## Promoting a new beadhive-app version
+
+beadhive-app releases are cut manually, from a Mac (`just release <version>` in
+`beadhive-app`), which builds the universal DMG and uploads it as a release asset on *this*
+repo (see the mechanism note under "Bottling" above). Once that's landed, promote it to this
+tap's cask:
+
+```sh
+just promote-cask 0.2.0
+```
+
+This verifies the release asset is really there (not just "the tag was pushed"), downloads it
+to compute a real `sha256`, updates `Casks/beadhive-app.rb`'s `version`/`sha256`, reinstalls
+locally, and runs `brew audit --cask`. It does not commit or push — review the diff yourself,
+then:
+
+```sh
+git add Casks/beadhive-app.rb && git commit -m "beadhive-app 0.2.0" && git push
+```
+
+## Installing beadhive-app
+
+```sh
+brew install --cask beadhive/tap/beadhive-app
+```
+
+beadhive-app ships ad-hoc signed, not notarized (`bh-infra-5n0.5`: stay unsigned for now, it's
+pre-alpha). A cask-installed copy is quarantined, so the first launch gets Gatekeeper's harsher
+"Beadhive is damaged and can't be opened" dialog — which doesn't name its actual cause — rather
+than the milder "developer cannot be verified" dialog a locally built copy would show. To
+install anyway, add this to your shell profile rather than passing a one-shot flag to `brew
+install`: Homebrew re-quarantines on every `brew upgrade --cask`, so a flag on one install
+leaves you back at the same dialog next upgrade. This export is **global** — it affects every
+cask you install, not just this one:
+
+```sh
+export HOMEBREW_CASK_OPTS='--no-quarantine'
+```
 
 ## Documentation
 

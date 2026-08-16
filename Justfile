@@ -44,6 +44,24 @@ promote version="": _link-tap
     brew audit --formula beadhive/tap/beadhive
     @echo "==> All checks passed. Review the diff (git diff Formula/beadhive.rb), then commit + push."
 
+# Promote a `just release`-cut beadhive-app version to this tap's cask. Run
+# this AFTER cutting the release in beadhive-app (`just release <version>`,
+# which uploads the DMG HERE since beadhive-app is private and 404s
+# unauthenticated downloads) -- it verifies the release asset is really
+# there, computes its sha256, updates Casks/beadhive-app.rb, then reinstalls
+# + audits locally. Does NOT commit or push -- review the diff yourself
+# first.
+#
+# version is optional -- omit it to auto-detect the latest beadhive-app-*
+# release on this repo. Usage: just promote-cask / just promote-cask 0.1.0
+promote-cask version="": _link-tap
+    python3 scripts/promote-cask-version.py {{version}}
+    @echo "==> Reinstalling + auditing locally..."
+    -brew uninstall --cask --force beadhive/tap/beadhive-app
+    brew install --cask beadhive/tap/beadhive-app
+    brew audit --cask beadhive/tap/beadhive-app
+    @echo "==> All checks passed. Review the diff (git diff Casks/beadhive-app.rb), then commit + push."
+
 # Lint GitHub workflows (actionlint, if installed) and the formula
 # (`brew style` + `brew audit --strict`). Does not require the tap to be
 # built/installed first.
