@@ -1,10 +1,8 @@
 cask "beadhive-app" do
-  # PLACEHOLDER, populated by `just promote-cask`. No beadhive-app-* release
-  # exists on this repo yet (release.sh landed via bh-app-pic but has not
-  # been run for real) -- run `just release <version>` in beadhive-app, then
-  # `just promote-cask` here, before this cask is actually installable.
+  # version/sha256 populated by `just promote-cask` from the real
+  # beadhive-app-0.1.0 release (bh-infra-5n0.7).
   version "0.1.0"
-  sha256 "0000000000000000000000000000000000000000000000000000000000000000"
+  sha256 "e49d63a9a9872ea04edcfb0a13a91242fa6699534046a270b92321042c7cff0a"
 
   # Asset lives on THIS repo's releases, not beadhive-app's: beadhive-app is
   # private, and GitHub 404s unauthenticated requests for release assets on
@@ -47,13 +45,16 @@ cask "beadhive-app" do
       the milder "developer cannot be verified" you'd see from a locally
       built copy.
 
-      To install anyway, add this to your shell profile rather than passing
-      a one-shot flag: Homebrew re-quarantines on every `brew upgrade
-      --cask`, so a flag on this install alone would leave you back at the
-      same dialog next upgrade. This export is GLOBAL -- it affects every
-      cask you install, not just this one:
+      `HOMEBREW_CASK_OPTS='--no-quarantine'` no longer works: Homebrew
+      deprecated and then removed that flag (Homebrew/brew#20755, gone as
+      of brew's `ba25213c81`) -- setting it is now a silent no-op and this
+      cask will still be quarantined. There is no cask-level opt-out;
+      strip the attribute yourself after every install/upgrade instead:
 
-        export HOMEBREW_CASK_OPTS='--no-quarantine'
+        xattr -dr com.apple.quarantine /Applications/Beadhive.app
+
+      `brew upgrade --cask` re-quarantines every time, so this needs
+      re-running after each upgrade, not just the first install.
     EOS
   end
 end
