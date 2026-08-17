@@ -89,20 +89,20 @@ git add Casks/beadhive-app.rb && git commit -m "beadhive-app 0.2.0" && git push
 
 ```sh
 brew install --cask beadhive/tap/beadhive-app
+xattr -dr com.apple.quarantine /Applications/Beadhive.app
 ```
 
 beadhive-app ships ad-hoc signed, not notarized (`bh-infra-5n0.5`: stay unsigned for now, it's
 pre-alpha). A cask-installed copy is quarantined, so the first launch gets Gatekeeper's harsher
 "Beadhive is damaged and can't be opened" dialog — which doesn't name its actual cause — rather
-than the milder "developer cannot be verified" dialog a locally built copy would show. To
-install anyway, add this to your shell profile rather than passing a one-shot flag to `brew
-install`: Homebrew re-quarantines on every `brew upgrade --cask`, so a flag on one install
-leaves you back at the same dialog next upgrade. This export is **global** — it affects every
-cask you install, not just this one:
+than the milder "developer cannot be verified" dialog a locally built copy would show. The
+`xattr` step above strips that quarantine flag so the app launches.
 
-```sh
-export HOMEBREW_CASK_OPTS='--no-quarantine'
-```
+There is no cask-level or `brew`-level opt-out for this: `HOMEBREW_CASK_OPTS='--no-quarantine'`
+used to work but Homebrew deprecated and then removed that flag (`Homebrew/brew#20755`), so
+setting it is now a silent no-op and the cask will still be quarantined. `brew upgrade --cask`
+re-quarantines every time too, so re-run the `xattr` command after every upgrade, not just the
+first install.
 
 ## Documentation
 
