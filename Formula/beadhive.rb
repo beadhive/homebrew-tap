@@ -401,6 +401,28 @@ class Beadhive < Formula
     virtualenv_install_with_resources
   end
 
+  # POST-INSTALL CHANNEL — the sentence below is one of THREE verbatim copies, and this is
+  # the only one outside the beadhive repo (beadhive bead bh-0olv9.10). The others are
+  # `bh`'s own setup-gate hint (src/beadhive/cli.py, _enforce_setup_gate) and README.md's
+  # "First run" section, which pyproject's `readme = "README.md"` also makes the PyPI long
+  # description. The canonical string is `beadhive.setup_guide.POST_INSTALL_POINTER`, whose
+  # comment records all three. No test in this repo or that one can guard this copy, so:
+  # if you reword it, reword it there too.
+  #
+  # `brew install` is exactly the route that never sees INSTALL.md, so without this the user
+  # is left with `bh` on PATH, no ~/.beadhive, and every verb they try next refused by the
+  # setup gate.
+  def caveats
+    <<~EOS
+      Run `bh setup guide` to finish setup — a guided, probe-first walk from a bare
+      install to a configured workspace.
+
+      Homebrew installs `bh` alone. The four tools it drives (bd, dolt, gh,
+      git-workspace) are not installed or version-matched — `bh setup check`
+      reports where you stand.
+    EOS
+  end
+
   test do
     system bin/"bh", "--help"
   end
