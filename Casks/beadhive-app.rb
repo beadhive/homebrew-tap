@@ -1,8 +1,8 @@
 cask "beadhive-app" do
   # version/sha256 populated by `just promote-cask` from the real
   # beadhive-app-0.1.0 release (bh-infra-5n0.7).
-  version "0.1.0"
-  sha256 "e49d63a9a9872ea04edcfb0a13a91242fa6699534046a270b92321042c7cff0a"
+  version "0.1.2"
+  sha256 "1e7a8db86c14a65a4054f51045b80e4fa731f1088dae571fe8eeffe61f3e3c2a"
 
   # Asset lives on THIS repo's releases, not beadhive-app's: beadhive-app is
   # private, and GitHub 404s unauthenticated requests for release assets on
