@@ -3,8 +3,8 @@ class Beadhive < Formula
 
   desc "CLI for managing beads issue tracking across many repositories"
   homepage "https://github.com/beadhive/beadhive"
-  url "https://files.pythonhosted.org/packages/3b/20/95b7f189b55f10f73da7bbcc622c04e0fed84e7393436a47bd5d112ae7a9/beadhive-0.12.2.tar.gz"
-  sha256 "3ce8a01383334e9e49e4e18d27db62d88f8ff9d515d6b1e37751b2ef82c70742"
+  url "https://files.pythonhosted.org/packages/16/3c/641b837c06a3921b819bef294e16e3ecb3a620afd4af29441fe292feee14/beadhive-0.13.0.tar.gz"
+  sha256 "4166c2aec159c6b2aad1c0eeb39493045d55b11df55f22b7bff2b4a476ab681b"
   # TODO: no LICENSE file in beadhive/beadhive and no license classifier on PyPI
   # yet — add a `license` field here once the source repo declares one.
 
@@ -94,8 +94,8 @@ class Beadhive < Formula
   end
 
   resource "cyclopts" do
-    url "https://files.pythonhosted.org/packages/be/05/689617b7e86503417c172f577d791524cb13b9697303d5d44409a971ba10/cyclopts-4.22.5.tar.gz"
-    sha256 "94044506317462cad90fb01a917dadce1f48a0915ba3605dc8d178dea1229e24"
+    url "https://files.pythonhosted.org/packages/5e/62/1b160d5e8c20174392a3a5e3e7e6542e02e6f6922b35ba0962829a6b5c90/cyclopts-4.23.0.tar.gz"
+    sha256 "2f764bbd90f1888073971c09576f90e594f80353588e10aa615b7d59bc009821"
   end
 
   resource "dnspython" do
@@ -129,8 +129,8 @@ class Beadhive < Formula
   end
 
   resource "griffelib" do
-    url "https://files.pythonhosted.org/packages/33/e4/8d187ea29c2e30b3a09505c567513077d6117861bde1fbd997a167f262ec/griffelib-2.1.0.tar.gz"
-    sha256 "762a186d2c6fd6794d4ea20d428d597ffb857cb56b66421651cbba15bdd5e813"
+    url "https://files.pythonhosted.org/packages/f0/b4/a767e91c606deefc447a96eaf59edd77397960b1d677dffd833ee8449831/griffelib-2.2.0.tar.gz"
+    sha256 "e1bc36fe9cd21d4b6b659b456346755e4cfdc5676c0a5214083126ee12612b3c"
   end
 
   resource "h11" do
@@ -154,8 +154,8 @@ class Beadhive < Formula
   end
 
   resource "idna" do
-    url "https://files.pythonhosted.org/packages/cd/63/9496c57188a2ee585e0f1db071d75089a11e98aa86eb99d9d7618fc1edce/idna-3.18.tar.gz"
-    sha256 "ffb385a7e039654cef1ab9ef32c6fafe283c0c0467bba1d9029738ce4a14a848"
+    url "https://files.pythonhosted.org/packages/5f/f7/abb373e5757eaec4b922b92f97ec8d6d7e057cf06778247604fbc4e7c3f3/idna-3.19.tar.gz"
+    sha256 "5e0811a4383b21dc5838069f801c4fb62113b7447663d2530d2bd6e77b49bf15"
   end
 
   resource "jaraco-classes" do
@@ -279,8 +279,8 @@ class Beadhive < Formula
   end
 
   resource "pygments" do
-    url "https://files.pythonhosted.org/packages/c3/b2/bc9c9196916376152d655522fdcebac55e66de6603a76a02bca1b6414f6c/pygments-2.20.0.tar.gz"
-    sha256 "6757cd03768053ff99f3039c1a36d6c0aa0b263438fcab17520b30a303a82b5f"
+    url "https://files.pythonhosted.org/packages/49/2e/ced460408999b33da6b31b0021b0f37d329e202d4169aeb164493778f25b/pygments-2.21.0.tar.gz"
+    sha256 "610ca751c9bc2492b38eb9a38a7fbc93edbbb2d7182edaf34e66ae493dee5c8c"
   end
 
   resource "pyjwt" do
@@ -294,8 +294,8 @@ class Beadhive < Formula
   end
 
   resource "python-dotenv" do
-    url "https://files.pythonhosted.org/packages/82/ed/0301aeeac3e5353ef3d94b6ec08bbcabd04a72018415dcb29e588514bba8/python_dotenv-1.2.2.tar.gz"
-    sha256 "2c371a91fbd7ba082c2c1dc1f8bf89ca22564a087c2c287cd9b662adde799cf3"
+    url "https://files.pythonhosted.org/packages/6a/53/ed9d74092561d4b01a2ef1349d52cdbc135e526c245f366b089cfca6de49/python_dotenv-1.2.3.tar.gz"
+    sha256 "a20a594dabeaa385725aa239d5244871c143ecb356add8a20fcf23773a6c3a35"
   end
 
   resource "python-multipart" do
