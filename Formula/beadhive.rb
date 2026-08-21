@@ -3,8 +3,8 @@ class Beadhive < Formula
 
   desc "CLI for managing beads issue tracking across many repositories"
   homepage "https://github.com/beadhive/beadhive"
-  url "https://files.pythonhosted.org/packages/16/3c/641b837c06a3921b819bef294e16e3ecb3a620afd4af29441fe292feee14/beadhive-0.13.0.tar.gz"
-  sha256 "4166c2aec159c6b2aad1c0eeb39493045d55b11df55f22b7bff2b4a476ab681b"
+  url "https://files.pythonhosted.org/packages/e4/c8/5ec398b650b64c7523268e50985d343c82aa6034bd08cf8e74b3f2955673/beadhive-0.14.0.tar.gz"
+  sha256 "a7a395ab060392b4db1df91e969d72a8a33b7ee66404b1a347616ef52ef00a8d"
   # TODO: no LICENSE file in beadhive/beadhive and no license classifier on PyPI
   # yet — add a `license` field here once the source repo declares one.
 
@@ -379,8 +379,8 @@ class Beadhive < Formula
   end
 
   resource "uvicorn" do
-    url "https://files.pythonhosted.org/packages/2e/28/64ca011edf31c715b4fad359c587ea52391aaffa125065695590241ff617/uvicorn-0.52.3.tar.gz"
-    sha256 "18857b9e6579300be55c91c0a1cfd37d9a2cf0cabea33b88275f199eb73b8b58"
+    url "https://files.pythonhosted.org/packages/f2/0f/3f86e61397dd33bf2ccf28188c40db6a740658aeebbbf6e7dbc101a1f487/uvicorn-0.52.4.tar.gz"
+    sha256 "73acfee47a0b133c5de13d219492d62d8a31e935f4fe6e41a232451a15379f86"
   end
 
   resource "watchfiles" do
