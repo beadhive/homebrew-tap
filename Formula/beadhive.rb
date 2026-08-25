@@ -3,8 +3,8 @@ class Beadhive < Formula
 
   desc "CLI for managing beads issue tracking across many repositories"
   homepage "https://github.com/beadhive/beadhive"
-  url "https://files.pythonhosted.org/packages/8b/e0/6a62e23ea084650840228c3a5f26110e96328423bb911ba0463dbeea5d75/beadhive-0.15.0.tar.gz"
-  sha256 "0da4f646851951bf6474dd004157a3ff51004fd01e1af12c10be1213868aa17d"
+  url "https://files.pythonhosted.org/packages/69/a6/58782d9c93583360cc2e6a9b1fd90f2145ba1d83557949168a1d0b1f4af5/beadhive-0.15.1.tar.gz"
+  sha256 "a151c814a98c822e669d7c0f40bdc30a1ff33e56b3af61f557209ae0f372645f"
   # TODO: no LICENSE file in beadhive/beadhive and no license classifier on PyPI
   # yet — add a `license` field here once the source repo declares one.
 
@@ -214,8 +214,8 @@ class Beadhive < Formula
   end
 
   resource "mcp" do
-    url "https://files.pythonhosted.org/packages/30/d3/f9acc21dfc886e4f78e2add1a47db46ce16884346afde53f8a064c02c891/mcp-1.29.0.tar.gz"
-    sha256 "52d01f334de1868cc3bb2d6604931126a67631f99a6c5d3b82ba47290315ec36"
+    url "https://files.pythonhosted.org/packages/b5/48/0bb26fdfe7ac16875f534a101ce2405eae192bdef37e7451f2f4507c13ec/mcp-1.29.1.tar.gz"
+    sha256 "1967ba4c315f7a375146209949f45950d18b0efd2f913d7cf3400bc723ee5f04"
   end
 
   resource "mdurl" do
@@ -249,8 +249,8 @@ class Beadhive < Formula
   end
 
   resource "platformdirs" do
-    url "https://files.pythonhosted.org/packages/b8/d7/e7bfbc86e9f99ff7807e24de7703f032e9c9ba80bb355cf26e0e9bc5a75e/platformdirs-4.11.3.tar.gz"
-    sha256 "66a73d38a849810252df809a3d8bcbda8e26f6c189920e7535ad608a48dbb5ab"
+    url "https://files.pythonhosted.org/packages/50/bb/ebc6636e1ae41314f796ebb7215fd28febb45f9aac72f2b04cb74b5071dc/platformdirs-4.11.4.tar.gz"
+    sha256 "f3373be828247211d0febabea97e238c3dfde8a60b3c90c32756fb52cb21556d"
   end
 
   resource "py-key-value-aio" do
