@@ -3,8 +3,8 @@ class Beadhive < Formula
 
   desc "CLI for managing beads issue tracking across many repositories"
   homepage "https://github.com/beadhive/beadhive"
-  url "https://files.pythonhosted.org/packages/e4/c8/5ec398b650b64c7523268e50985d343c82aa6034bd08cf8e74b3f2955673/beadhive-0.14.0.tar.gz"
-  sha256 "a7a395ab060392b4db1df91e969d72a8a33b7ee66404b1a347616ef52ef00a8d"
+  url "https://files.pythonhosted.org/packages/8b/e0/6a62e23ea084650840228c3a5f26110e96328423bb911ba0463dbeea5d75/beadhive-0.15.0.tar.gz"
+  sha256 "0da4f646851951bf6474dd004157a3ff51004fd01e1af12c10be1213868aa17d"
   # TODO: no LICENSE file in beadhive/beadhive and no license classifier on PyPI
   # yet — add a `license` field here once the source repo declares one.
 
@@ -94,8 +94,8 @@ class Beadhive < Formula
   end
 
   resource "cyclopts" do
-    url "https://files.pythonhosted.org/packages/5e/62/1b160d5e8c20174392a3a5e3e7e6542e02e6f6922b35ba0962829a6b5c90/cyclopts-4.23.0.tar.gz"
-    sha256 "2f764bbd90f1888073971c09576f90e594f80353588e10aa615b7d59bc009821"
+    url "https://files.pythonhosted.org/packages/fc/db/becc1331b1eefe8e3370281a2fd7b9685ae6a10dbdd54c7e44ea05bf2ed6/cyclopts-4.23.2.tar.gz"
+    sha256 "1c9de7f245394d3ef9344fc6c976fc373fe1f2ce929b27f08ad4ea8499c13461"
   end
 
   resource "dnspython" do
